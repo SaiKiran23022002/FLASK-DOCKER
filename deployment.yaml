@@ -1,0 +1,21 @@
+apiVersion: apps/v1  # Defines the API version for the deployment
+kind: Deployment  # Specifies the kind of Kubernetes object
+metadata:
+  name: flask-app-deployment  # The name of the deployment
+  labels:
+    app: flask-app  # Label used to identify the deployment
+spec:
+  replicas: 2  # Number of pod replicas to run for high availability
+  selector:
+    matchLabels:
+      app: flask-app  # Matches pods with the label 'app: flask-app'
+  template:
+    metadata:
+      labels:
+        app: flask-app  # Ensures that the pods have the 'app: flask-app' label
+    spec:
+      containers:
+      - name: flask-app  # The name of the container in the pod
+        image: saikiran00708/flask-docker-image01:latest  # Docker image for the Flask app
+        ports:
+        - containerPort: 5000  # Port the container listens on inside the pod
